@@ -10,12 +10,13 @@ import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { Button } from "@mui/material";
 
 
 export default function NewEntry(){
     return(
         // The padding should be adjusted when the nav bar is added in 
-        <div style={{backgroundColor:'#F1F1F1', paddingTop:60}} >
+        <div style={{backgroundColor:'#F1F1F1', paddingTop:60, paddingBottom:40}} >
 
             <Typography variant="h4" sx={{textAlign:'center'}}>New Squirrel Sighting</Typography>
 
@@ -93,6 +94,13 @@ export default function NewEntry(){
                                 <FormControlLabel value="ttwitch" control={<Radio />} label="Tail Twitches" />
                             </RadioGroup>
 
+                        </Grid>
+                        
+                        <Grid xs={6} ></Grid>
+                        <Grid xs={2}>
+                            <Button variant="contained" sx={{marginTop:2}}>
+                                Submit
+                            </Button>
                         </Grid>
                     </Grid>
                 </FormControl>
