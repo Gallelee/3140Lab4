@@ -1,5 +1,4 @@
 import React from "react";
-import './App.css';
 import squirrelbg from './assets/RedSquirrelbg.jpeg';
 import styled from "styled-components";
 import { styled as styled2 } from '@mui/system';
@@ -41,10 +40,7 @@ export default function Homepage(){
                 <Grid xs={6}></Grid>
             </HomeGrid>
         </BgDiv>
-    );
-
-
-    
+    );   
 }
 
 const BgDiv = styled.div`
@@ -61,8 +57,8 @@ const HomeGrid = styled2(Grid)({
 });
 
 const HomePaper = styled2(Paper)({
-    paddingTop: 20,
+    paddingTop: 30,
     paddingLeft: 10,
     paddingRight: 10,    
-    paddingBottom: 25
+    paddingBottom: 35
 });
