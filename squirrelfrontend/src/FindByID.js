@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, TextField, IconButton } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, TextField, IconButton,Button } from "@mui/material";
 import useFetch from "./hooks/useFetch";
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -38,14 +38,13 @@ export default function FindByID(){
     return(
         <MainContainer>
             <Typography variant="h4" align="center" style={{marginTop: "5%"} }> Find By Squirrel ID</Typography>
-            <SearchBox>
-            <TextField onChange={handleInputChange}/>
-            <IconButton onClick={handleSearchPress}>
-                <SearchIcon/>
-            </IconButton>
-            </SearchBox>
+            
             
         <TableContainer>
+            <SearchBox>
+            <TextField onChange={handleInputChange} variant="standard" helperText="Enter Squirrel ID" sx={{marginRight: "10px"}}/>
+            <Button variant="contained" onClick={handleSearchPress}>Search</Button>
+            </SearchBox>
                 <Table component={Paper} >
                     <TableHead>
                         <TableRow>
