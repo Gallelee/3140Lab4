@@ -5,6 +5,7 @@ import {Button} from "@mui/material"
 import {Tabs} from "@mui/material"
 import {Tab} from "@mui/material"
 import { useState } from "react"
+import {Link} from "react-router-dom"
 
 
 export default function Navbar(){
@@ -16,8 +17,8 @@ export default function Navbar(){
     return(
         <TabContainer>
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Home" />
-            <Tab label="View All" />
+            <Tab label="Home" LinkComponent={Link} to="/"/>
+            <Tab label="View All" LinkComponent={Link} to="./ViewAll"/>
             <Tab label="Find By ID"/>
             <Tab label="New Entry" />
           </Tabs>
@@ -27,7 +28,7 @@ export default function Navbar(){
 }
 
 const TabContainer = styled.div`
-    position: fixed;
+    position: relative;
     width: 100%;
     
     height: 5%;
