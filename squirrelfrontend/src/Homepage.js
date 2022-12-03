@@ -20,12 +20,12 @@ export default function Homepage(){
                         <br />
 
                         <Typography variant="body1" sx={{px:'25px'}}>
-                            Use this app to track squirrel sighting at CUNY Brooklyn College's campus. Students are invited to view previously recorded observational data or add their own entries.
+                            Brooklyn College has collected dat on the squirrel population on its campus. Trackers have noted squirrel primary and secondary colors, activities, and behaviors.
                         </Typography>
                         <br />
 
                         <Typography variant="body1" sx={{px:'25px'}}>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus?
+                            Use this app to track squirrel sighting at CUNY Brooklyn College's campus. Students are invited to view previously recorded observational data or add their own entries.
                         </Typography>
                         
                         <Stack direction="column" alignItems="center" spacing={2} sx={{mt:4}}>
