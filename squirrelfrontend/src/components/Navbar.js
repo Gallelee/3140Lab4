@@ -19,7 +19,7 @@ export default function Navbar(){
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Home" LinkComponent={Link} to="/"/>
             <Tab label="View All" LinkComponent={Link} to="./ViewAll"/>
-            <Tab label="Find By ID"/>
+            <Tab label="Find By ID" LinkComponent={Link} to="./FindByID"/>
             <Tab label="New Entry" />
           </Tabs>
         </TabContainer>
