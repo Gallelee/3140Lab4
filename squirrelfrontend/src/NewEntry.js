@@ -14,6 +14,11 @@ import { Button } from "@mui/material";
 
 
 export default function NewEntry(){
+    
+    function handleSubmit(){
+        console.log("submitted");
+    }
+
     return(
         // The padding should be adjusted when the nav bar is added in 
         <div style={{backgroundColor:'#F1F1F1', paddingTop:60, paddingBottom:40}} >
@@ -98,7 +103,7 @@ export default function NewEntry(){
                         
                         <Grid xs={6} ></Grid>
                         <Grid xs={2}>
-                            <Button variant="contained" sx={{marginTop:2}}>
+                            <Button variant="contained" sx={{marginTop:2}} onclick={handleSubmit()}>
                                 Submit
                             </Button>
                         </Grid>
