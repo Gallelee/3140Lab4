@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, TextField, IconButton,Button } from "@mui/material";
-import useFetch from "./hooks/useFetch";
+import useAxios from "./hooks/useFetch";
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function FindByID(){
-    const data = useFetch("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll")
+    const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll")
 
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -28,8 +28,6 @@ export default function FindByID(){
                 setSquirrelData((prev) => [...prev, x])
             }
         }
-        console.log(inputID)
-        console.log(squirrelData)
     }
 
     const handleInputChange = (event) => {
@@ -58,7 +56,7 @@ export default function FindByID(){
                     </TableHead>
                     <TableBody>
                         {squirrelData? squirrelData.slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(elm => {
-                             return(<TableRow>
+                             return(<TableRow key={elm.squirrel_id}>
                                     <TableCell>{elm.id}</TableCell>
                                     <TableCell>{elm.squirrel_id}</TableCell>
                                     <TableCell>{elm.color}</TableCell>
