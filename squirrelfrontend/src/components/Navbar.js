@@ -20,7 +20,7 @@ export default function Navbar(){
             <Tab label="Home" LinkComponent={Link} to="/"/>
             <Tab label="View All" LinkComponent={Link} to="./ViewAll"/>
             <Tab label="Find By ID" LinkComponent={Link} to="./FindByID"/>
-            <Tab label="New Entry" />
+            <Tab label="New Entry" LinkComponent={Link} to="./NewEntry"/>
           </Tabs>
         </TabContainer>
     )
@@ -30,7 +30,6 @@ export default function Navbar(){
 const TabContainer = styled.div`
     position: relative;
     width: 100%;
-    
     height: 5%;
 `
 
