@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, TextField, IconButton,Button } from "@mui/material";
 import useAxios from "./hooks/useAxios";
 import SearchIcon from '@mui/icons-material/Search';
-
+import axios from "axios";
 export default function FindByID(){
     const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll")
 
@@ -32,6 +32,12 @@ export default function FindByID(){
 
     const handleInputChange = (event) => {
         setInputID(event.target.value)
+    }
+
+    const handleDeletePress = async(event) => {
+        const id = event.target.parentNode.parentNode.firstChild.innerHTML
+        const response = await axios.delete(`http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/delete/${id}`)
+        console.log(response.data)
     }
     return(
         <MainContainer>
@@ -63,6 +69,7 @@ export default function FindByID(){
                                     <TableCell>{elm.activity}</TableCell>
                                     <TableCell>{elm.behavior}</TableCell>
                                     <TableCell>{elm.highlight_color}</TableCell>
+                                    <TableCell ><IconButton onClick={handleDeletePress} sx={{color: "red"}} >Delete</IconButton></TableCell>
                                 </TableRow>)
                                
                         }): ""}

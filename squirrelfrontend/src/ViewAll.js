@@ -1,10 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete"
 import useAxios from "./hooks/useAxios";
+import axios from "axios";
+
 
 export default function ViewAll(){
-    const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll") //custom hook that takes a url and does a get request
+    const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll") //custom hook that takes a url and does a get request. Code for the hook is in the hook folder
 
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -17,6 +20,13 @@ export default function ViewAll(){
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
       };
+
+    const handleDeletePress = async(event) => {
+        const id = event.target.parentNode.parentNode.firstChild.innerHTML
+        const response = await axios.delete(`http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/delete/${id}`)
+        console.log(response.data)
+        
+    }
     return(
         <MainContainer>
             <Typography variant="h4" align="center" style={{marginTop: "5%"} }> All Squirrel Sightings</Typography>
@@ -42,6 +52,7 @@ export default function ViewAll(){
                                     <TableCell>{elm.activity}</TableCell>
                                     <TableCell>{elm.behavior}</TableCell>
                                     <TableCell>{elm.highlight_color}</TableCell>
+                                    <TableCell ><IconButton onClick={handleDeletePress} sx={{color: "red"}} >Delete</IconButton></TableCell>
                                 </TableRow>
                             )
                         }): ""}
