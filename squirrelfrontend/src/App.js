@@ -5,7 +5,7 @@ import NewEntry from './NewEntry';
 function App() {
   return (
     <div>
-        <Homepage />
+        <NewEntry />
     </div>
   );
 }
