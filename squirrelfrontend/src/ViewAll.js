@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete"
@@ -7,7 +7,19 @@ import axios from "axios";
 
 
 export default function ViewAll(){
-    const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll") //custom hook that takes a url and does a get request. Code for the hook is in the hook folder
+    //const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll") //custom hook that takes a url and does a get request. Code for the hook is in the hook folder
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        async function getData(){
+            const sqData = await axios.get('http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll');
+            console.log(sqData.data);
+            setData(sqData.data);
+        }
+
+        getData();
+    }, [])
 
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -62,7 +74,7 @@ export default function ViewAll(){
                 <TablePagination
                  rowsPerPageOptions={[10, 15, 25]}
                  component="div"
-                 count={data.length}
+                 count={data? data.length : 0 }
                  rowsPerPage={rowsPerPage}
                  page={page}
                  onPageChange={handleChangePage}
