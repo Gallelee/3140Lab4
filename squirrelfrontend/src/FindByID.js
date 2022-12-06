@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, TextField, IconButton,Button } from "@mui/material";
 import useAxios from "./hooks/useAxios";
 import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
 export default function FindByID(){
-    const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll")
+    //const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll")
 
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
     const [inputID, setInputID] = useState(-1)
     const [squirrelData, setSquirrelData] = useState([])
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        async function getData(){
+            const sqData = await axios.get('http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll');
+            setData(sqData.data);
+        }
+
+        getData();
+    }, [])
+
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -25,7 +37,7 @@ export default function FindByID(){
         setSquirrelData([])
         for(let x of data){
             if(x.squirrel_id == inputID){
-                setSquirrelData((prev) => [...prev, x])
+                setSquirrelData()
             }
         }
     }
@@ -69,7 +81,7 @@ export default function FindByID(){
                                     <TableCell>{elm.activity}</TableCell>
                                     <TableCell>{elm.behavior}</TableCell>
                                     <TableCell>{elm.highlight_color}</TableCell>
-                                    <TableCell ><IconButton onClick={handleDeletePress} sx={{color: "red"}} >Delete</IconButton></TableCell>
+                                    <TableCell ><IconButton onClick={handleDeletePress} sx={{color: "red"}}>Delete</IconButton></TableCell>
                                 </TableRow>)
                                
                         }): ""}
