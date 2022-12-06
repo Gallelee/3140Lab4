@@ -1,11 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography } from "@mui/material";
-import useFetch from "./hooks/useFetch";
+import useAxios from "./hooks/useAxios";
 
 export default function ViewAll(){
-    const data = useFetch("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll")
-    console.log(data[0])
+    const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll") //custom hook that takes a url and does a get request
 
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)

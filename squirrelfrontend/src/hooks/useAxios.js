@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios"
 
-
-export default function useFetch(url){
+//custom hook that takes in a url and gets data. able to be used accross the app
+export default function useAxios(url){
     const [data,setData] = useState(0)
 
     useEffect(()=> {
