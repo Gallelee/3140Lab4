@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, TextField, IconButton,Button } from "@mui/material";
-import useAxios from "./hooks/useFetch";
+import useAxios from "./hooks/useAxios";
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function FindByID(){
