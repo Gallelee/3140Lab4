@@ -15,7 +15,14 @@ export default function ViewAll(){
         async function getData(){
             const sqData = await axios.get('http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll');
             console.log(sqData.data);
-            setData(sqData.data);
+            console.log(Array.isArray(sqData.data))
+            if(Array.isArray(sqData.data)){
+                setData(sqData.data)
+                console.log("is array")
+            }
+            else{
+                setData(sqData.data.data)
+            }
         }
 
         getData();
