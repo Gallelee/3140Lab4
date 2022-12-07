@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, IconButton } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter, Paper, Typography, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete"
 import useAxios from "./hooks/useAxios";
 import axios from "axios";
 
 
-export default function ViewAll(){
+export default function ViewAll() {
     //const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll") //custom hook that takes a url and does a get request. Code for the hook is in the hook folder
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        async function getData(){
+        async function getData() {
             const sqData = await axios.get('http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll');
             console.log(sqData.data);
             console.log(Array.isArray(sqData.data))
@@ -33,23 +33,23 @@ export default function ViewAll(){
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
-      };
+    };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
-      };
+    };
 
-    const handleDeletePress = async(event) => {
+    const handleDeletePress = async (event) => {
         const id = event.target.parentNode.parentNode.firstChild.innerHTML
         const response = await axios.delete(`http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/delete/${id}`)
         console.log(response.data)
-        
+
     }
-    return(
+    return (
         <MainContainer>
-            <Typography variant="h4" align="center" style={{marginTop: "5%"} }> All Squirrel Sightings</Typography>
-        <TableContainer>
+            <Typography variant="h4" align="center" style={{ marginTop: "5%" }}> All Squirrel Sightings</Typography>
+            <TableContainer>
                 <Table component={Paper} >
                     <TableHead>
                         <TableRow>
@@ -62,8 +62,8 @@ export default function ViewAll(){
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data? data.slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(elm => {
-                            return(
+                        {data ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(elm => {
+                            return (
                                 <TableRow>
                                     <TableCell>{elm.id}</TableCell>
                                     <TableCell>{elm.squirrel_id}</TableCell>
@@ -71,24 +71,24 @@ export default function ViewAll(){
                                     <TableCell>{elm.activity}</TableCell>
                                     <TableCell>{elm.behavior}</TableCell>
                                     <TableCell>{elm.highlight_color}</TableCell>
-                                    <TableCell ><IconButton onClick={handleDeletePress} sx={{color: "red"}} >Delete</IconButton></TableCell>
+                                    <TableCell ><IconButton onClick={handleDeletePress} sx={{ color: "red" }} >Delete</IconButton></TableCell>
                                 </TableRow>
                             )
-                        }): ""}
+                        }) : ""}
                     </TableBody>
-                    
+
                 </Table>
                 <TablePagination
-                 rowsPerPageOptions={[10, 15, 25]}
-                 component="div"
-                 count={data? data.length : 0 }
-                 rowsPerPage={rowsPerPage}
-                 page={page}
-                 onPageChange={handleChangePage}
-                 onRowsPerPageChange={handleChangeRowsPerPage}
+                    rowsPerPageOptions={[10, 15, 25]}
+                    component="div"
+                    count={data ? data.length : 0}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-                
-        </TableContainer>
+
+            </TableContainer>
         </MainContainer>
     )
 }
