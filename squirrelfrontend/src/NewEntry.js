@@ -15,12 +15,12 @@ import { Button } from "@mui/material";
 import axios from 'axios';
 
 
-export default function NewEntry(){
-    const[id, setId] = React.useState('');
-    const[sqColor, setSqColor] = React.useState('black');
-    const[secondary, setSecondary] = React.useState('black');
-    const[act, setAct] = React.useState('running');
-    const[behav, setBehav] = React.useState('kuks');
+export default function NewEntry() {
+    const [id, setId] = React.useState('');
+    const [sqColor, setSqColor] = React.useState('black');
+    const [secondary, setSecondary] = React.useState('black');
+    const [act, setAct] = React.useState('running');
+    const [behav, setBehav] = React.useState('kuks');
     const [helperText, setHelperText] = React.useState('');
     //const[error, setError] = React.useState(true);
 
@@ -39,7 +39,7 @@ export default function NewEntry(){
         setSecondary(event.target.value);
         setHelperText('');
     }
-     
+
     const handleActChange = (event) => {
         setAct(event.target.value);
         setHelperText('');
@@ -78,41 +78,41 @@ export default function NewEntry(){
             })
             .catch((error) => {
                 setHelperText('Error')
-               console.log(error.response.data);
+                console.log(error.response.data);
             })
 
     }
 
 
-    return(
+    return (
         // The padding should be adjusted when the nav bar is added in 
-        <div style={{backgroundColor:'#F1F1F1', paddingTop:60, paddingBottom:40}} >
+        <div style={{ backgroundColor: '#F1F1F1', paddingTop: 60, paddingBottom: 40 }} >
 
-            <Typography variant="h4" sx={{textAlign:'center'}}>New Squirrel Sighting</Typography>
+            <Typography variant="h4" sx={{ textAlign: 'center' }}>New Squirrel Sighting</Typography>
 
-            <Paper elevation={3} sx={{m:10, px:10, py:5}}>
+            <Paper elevation={3} sx={{ m: 10, px: 10, py: 5 }}>
                 <Typography variant="h6" >Enter Squirrel Information </Typography>
                 <br />
 
                 <form onSubmit={handleSubmit}>
-                    <FormControl sx={{width:'100%'}}>
+                    <FormControl sx={{ width: '100%' }}>
                         <Grid container spacing={2}>
                             <Grid xs={6}>
-                            
+
                                 <TextField
                                     required
                                     id="sqId"
                                     label="Squirrel ID"
-                                    defaultValue="" 
+                                    defaultValue=""
                                     value={id}
                                     onChange={handleTextChange}
-                                    sx={{width:200, mb: 4}}
+                                    sx={{ width: 200, mb: 4 }}
                                 />
 
-                                <br/>
+                                <br />
 
                                 <FormLabel id="demo-radio-buttons-group-label">Color</FormLabel>
-                            
+
                                 <RadioGroup
                                     aria-labelledby="demo-radio-buttons-group-label"
                                     name="radio-buttons-group"
@@ -125,10 +125,10 @@ export default function NewEntry(){
 
                                 </RadioGroup>
 
-                                <br/> <br/>
+                                <br /> <br />
 
                                 <FormLabel id="demo-radio-buttons-group-label">Secondary Color</FormLabel>
-                            
+
                                 <RadioGroup
                                     aria-labelledby="demo-radio-buttons-group-label"
                                     name="radio-buttons-group"
@@ -155,8 +155,8 @@ export default function NewEntry(){
                                     <FormControlLabel value="climbing" control={<Radio />} label="Climbing" />
                                     <FormControlLabel value="eating" control={<Radio />} label="Eating" />
                                 </RadioGroup>
-                                
-                                <br/>
+
+                                <br />
 
                                 <FormLabel id="demo-radio-buttons-group-label">Behavior</FormLabel>
                                 <RadioGroup
@@ -173,11 +173,11 @@ export default function NewEntry(){
                                 </RadioGroup>
 
                             </Grid>
-                            
+
                             <Grid xs={6} ></Grid>
                             <Grid xs={2}>
                                 <FormHelperText>{helperText}</FormHelperText>
-                                <Button variant="contained" sx={{marginTop:2}} type="submit" >
+                                <Button variant="contained" sx={{ marginTop: 2 }} type="submit" >
                                     Submit
                                 </Button>
                             </Grid>

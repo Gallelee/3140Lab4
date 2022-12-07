@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter,Paper, Typography, TextField, IconButton,Button } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow, TablePagination, TableFooter, Paper, Typography, TextField, IconButton, Button } from "@mui/material";
 import useAxios from "./hooks/useAxios";
 import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
-export default function FindByID(){
+export default function FindByID() {
     //const data = useAxios("http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll")
 
     const [page, setPage] = useState(0)
@@ -15,7 +15,7 @@ export default function FindByID(){
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        async function getData(){
+        async function getData() {
             const sqData = await axios.get('http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll');
             setData(sqData.data);
         }
@@ -26,17 +26,17 @@ export default function FindByID(){
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
-      };
+    };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
-      };
-    
+    };
+
     const handleSearchPress = async (event) => {
         setSquirrelData([])
-        for(let x of data){
-            if(x.squirrel_id == inputID){
+        for (let x of data) {
+            if (x.squirrel_id == inputID) {
                 setSquirrelData()
             }
         }
@@ -46,21 +46,21 @@ export default function FindByID(){
         setInputID(event.target.value)
     }
 
-    const handleDeletePress = async(event) => {
+    const handleDeletePress = async (event) => {
         const id = event.target.parentNode.parentNode.firstChild.innerHTML
         const response = await axios.delete(`http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/delete/${id}`)
         console.log(response.data)
     }
-    return(
+    return (
         <MainContainer>
-            <Typography variant="h4" align="center" style={{marginTop: "5%"} }> Find By Squirrel ID</Typography>
-            
-            
-        <TableContainer>
-            <SearchBox>
-            <TextField onChange={handleInputChange} variant="standard" helperText="Enter Squirrel ID" sx={{marginRight: "10px"}}/>
-            <Button variant="contained" onClick={handleSearchPress}>Search</Button>
-            </SearchBox>
+            <Typography variant="h4" align="center" style={{ marginTop: "5%" }}> Find By Squirrel ID</Typography>
+
+
+            <TableContainer>
+                <SearchBox>
+                    <TextField onChange={handleInputChange} variant="standard" helperText="Enter Squirrel ID" sx={{ marginRight: "10px" }} />
+                    <Button variant="contained" onClick={handleSearchPress}>Search</Button>
+                </SearchBox>
                 <Table component={Paper} >
                     <TableHead>
                         <TableRow>
@@ -73,32 +73,32 @@ export default function FindByID(){
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {squirrelData? squirrelData.slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(elm => {
-                             return(<TableRow key={elm.squirrel_id}>
-                                    <TableCell>{elm.id}</TableCell>
-                                    <TableCell>{elm.squirrel_id}</TableCell>
-                                    <TableCell>{elm.color}</TableCell>
-                                    <TableCell>{elm.activity}</TableCell>
-                                    <TableCell>{elm.behavior}</TableCell>
-                                    <TableCell>{elm.highlight_color}</TableCell>
-                                    <TableCell ><IconButton onClick={handleDeletePress} sx={{color: "red"}}>Delete</IconButton></TableCell>
-                                </TableRow>)
-                               
-                        }): ""}
+                        {squirrelData ? squirrelData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(elm => {
+                            return (<TableRow key={elm.squirrel_id}>
+                                <TableCell>{elm.id}</TableCell>
+                                <TableCell>{elm.squirrel_id}</TableCell>
+                                <TableCell>{elm.color}</TableCell>
+                                <TableCell>{elm.activity}</TableCell>
+                                <TableCell>{elm.behavior}</TableCell>
+                                <TableCell>{elm.highlight_color}</TableCell>
+                                <TableCell ><IconButton onClick={handleDeletePress} sx={{ color: "red" }}>Delete</IconButton></TableCell>
+                            </TableRow>)
+
+                        }) : ""}
                     </TableBody>
-                    
+
                 </Table>
                 <TablePagination
-                 rowsPerPageOptions={[10, 15, 25]}
-                 component="div"
-                 count={squirrelData.length}
-                 rowsPerPage={rowsPerPage}
-                 page={page}
-                 onPageChange={handleChangePage}
-                 onRowsPerPageChange={handleChangeRowsPerPage}
+                    rowsPerPageOptions={[10, 15, 25]}
+                    component="div"
+                    count={squirrelData.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-                
-        </TableContainer>
+
+            </TableContainer>
         </MainContainer>
     )
 }
