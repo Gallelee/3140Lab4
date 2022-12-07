@@ -17,7 +17,16 @@ export default function FindByID() {
     useEffect(() => {
         async function getData() {
             const sqData = await axios.get('http://127.0.0.1:5001/cisc3140quiz4/us-central1/app/api/getAll');
-            setData(sqData.data);
+            console.log(sqData.data);
+            console.log(Array.isArray(sqData.data))
+            if(Array.isArray(sqData.data)){
+                setData(sqData.data)
+                console.log("is array")
+            }
+            else{
+                setData(sqData.data.data)
+            }
+            
         }
 
         getData();
@@ -35,11 +44,13 @@ export default function FindByID() {
 
     const handleSearchPress = async (event) => {
         setSquirrelData([])
-        for (let x of data) {
-            if (x.squirrel_id == inputID) {
-                setSquirrelData()
+        let tempData = []
+        for(let x of data){
+            if(x.squirrel_id == inputID){
+                tempData.push(x)
             }
         }
+        setSquirrelData(tempData)
     }
 
     const handleInputChange = (event) => {
@@ -73,18 +84,18 @@ export default function FindByID() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {squirrelData ? squirrelData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(elm => {
-                            return (<TableRow key={elm.squirrel_id}>
-                                <TableCell>{elm.id}</TableCell>
-                                <TableCell>{elm.squirrel_id}</TableCell>
-                                <TableCell>{elm.color}</TableCell>
-                                <TableCell>{elm.activity}</TableCell>
-                                <TableCell>{elm.behavior}</TableCell>
-                                <TableCell>{elm.highlight_color}</TableCell>
-                                <TableCell ><IconButton onClick={handleDeletePress} sx={{ color: "red" }}>Delete</IconButton></TableCell>
-                            </TableRow>)
-
-                        }) : ""}
+                        {squirrelData? squirrelData.slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(elm => {
+                             return(<TableRow key={elm.id}>
+                                    <TableCell>{elm.id}</TableCell>
+                                    <TableCell>{elm.squirrel_id}</TableCell>
+                                    <TableCell>{elm.color}</TableCell>
+                                    <TableCell>{elm.activity}</TableCell>
+                                    <TableCell>{elm.behavior}</TableCell>
+                                    <TableCell>{elm.highlight_color}</TableCell>
+                                    <TableCell ><IconButton onClick={handleDeletePress} sx={{color: "red"}}>Delete</IconButton></TableCell>
+                                </TableRow>)
+                               
+                        }): ""}
                     </TableBody>
 
                 </Table>
